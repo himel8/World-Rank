@@ -1,12 +1,4 @@
-.container {
-  
+.counts {
+  margin: 12px 0;
+  color: var(--text-color-secondary);
 }
-
-.main {
- 
-}
-
-.footer {
-  
-}
-

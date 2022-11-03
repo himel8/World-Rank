@@ -1,21 +1,22 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-
-export default function Home() {
+import CountryTable from "../components/CountryTable/CountryTable";
+import Layout from "../components/Layout/Layout";
+import SearchInput from "../components/SearchInput/SearchInput";
+import styles from "../styles/Home.module.css";
+export default function Home({ countries }) {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout>
+      <div className={styles.counts}>Found {countries.length} countries</div>
 
-      <main className={styles.main}>
-        main
-      </main>
+      <SearchInput placeholder="Filter by Name, Region or subRegion" />
 
-      <footer className={styles.footer}>
-        footer
-      </footer>
-    </div>
-  )
+      <CountryTable countries={countries} />
+    </Layout>
+  );
 }
+
+export const getStaticProps = async () => {
+  const res = await fetch("https://restcountries.com/v3.1/all");
+  const countries = await res.json();
+
+  return { props: { countries } };
+};
